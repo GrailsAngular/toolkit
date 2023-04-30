@@ -99,11 +99,10 @@ func (t *Tools) UploadFiles(r *http.Request, uploadDir string, rename ...bool) (
 				}
 				if renameFile {
 					uploadedFile.NewFileName = fmt.Sprintf("%s%s", t.RandomString(25), filepath.Ext(hdr.Filename))
-					uploadedFile.OriginalFileName = hdr.Filename
 				} else {
 					uploadedFile.NewFileName = hdr.Filename
-					uploadedFile.OriginalFileName = hdr.Filename
 				}
+				uploadedFile.OriginalFileName = hdr.Filename
 				var outfile *os.File
 				defer outfile.Close()
 				if outfile, err = os.Create(filepath.Join(uploadDir, uploadedFile.NewFileName)); err != nil {
